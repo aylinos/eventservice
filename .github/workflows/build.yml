@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build App & Linting Test
+    name: Build App, Docker Image & Linting Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
