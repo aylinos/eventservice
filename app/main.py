@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+from app.routers import eventrouter, typerouter
 
 app = FastAPI()
+
+app.include_router(eventrouter.router)
+app.include_router(typerouter.router)
 
 
 # Index route

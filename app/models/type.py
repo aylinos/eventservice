@@ -8,7 +8,7 @@ class Type(Base):
     __tablename__ = "types"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True, nullable=False)
+    title = Column(String, unique=True, index=True, nullable=False)
 
     # events = relationship('Event', back_populates="event_type")
     events = relationship(

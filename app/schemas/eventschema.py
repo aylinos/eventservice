@@ -35,4 +35,5 @@ class EventUpdate(EventIn):
     price: Optional[float] = None
     location: Optional[str] = None
     is_private: Optional[bool] = None
+    creator: Optional[int] = None
     type: Optional[int] = None
