@@ -1,8 +1,6 @@
 from typing import List
-
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
-
 from app.db.session import get_db
 from app.repository import eventrepo
 from app.schemas import eventschema

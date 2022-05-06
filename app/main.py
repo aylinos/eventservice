@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from app.routers import eventrouter, typerouter
 
 app = FastAPI()
