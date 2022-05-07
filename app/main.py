@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from app.routers import eventrouter, typerouter
+from mangum import Mangum  # Amazon Lambda handler
 
 app = FastAPI()
 
@@ -18,3 +19,6 @@ def read_root():
 @app.get("/events")
 def read_root():
     return {"List of all events"}
+
+
+handler = Mangum(app=app)  # <----------- wrap the API with Mangum
