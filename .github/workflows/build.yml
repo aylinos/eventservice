@@ -45,7 +45,7 @@ jobs:
         run: docker build --file Dockerfile .
       - name: Create Zipfile archive of Dependencies
         run: |
-          cd ./venv/Lib/site-packages
+          cd ./venv/lib/python3.9/site-packages
           zip -r9 ../../../../api.zip .
       - name: Add App to Zip file
         run: cd ./app && zip -g ../api.zip -r .
