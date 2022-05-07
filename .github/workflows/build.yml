@@ -1,4 +1,4 @@
-name: Build App, Docker Image & Linting Test
+name: CI/CD Pipeline
 on: 
   pull_request_target:
     types:
@@ -9,7 +9,6 @@ on:
 
 jobs:
   continuous-integration:
-    name: Build App, Docker Image & Linting Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
