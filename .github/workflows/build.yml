@@ -38,6 +38,8 @@ jobs:
       - name: Check formatting
         run: . venv/bin/activate && isort -c .
       - name: Activate venv and Run Test 
+        env: 
+          DB_URI: ${{ secrets.DB_URI }}
         run: . venv/bin/activate && pytest
       - name: Build Docker image
         run: docker build --file Dockerfile .
