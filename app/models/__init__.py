@@ -1,2 +1,1 @@
-import event
-import type
+from ..models import event, type

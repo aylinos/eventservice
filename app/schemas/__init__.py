@@ -1,2 +1,1 @@
-import eventschema
-import typeschema
+from ..schemas import eventschema, typeschema

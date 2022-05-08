@@ -1,2 +1,1 @@
-import eventrouter
-import typerouter
+from ..routers import eventrouter, typerouter

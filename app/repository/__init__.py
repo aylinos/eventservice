@@ -1,2 +1,1 @@
-import eventrepo
-import typerepo
+from ..repository import eventrepo, typerepo

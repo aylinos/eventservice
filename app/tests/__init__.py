@@ -1,2 +1,1 @@
-import test_event
-import test_type
+from ..tests import test_event, test_type
