@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from mangum import Mangum  # Amazon Lambda handler
-
 from routers import eventrouter, typerouter
 
 app = FastAPI()
