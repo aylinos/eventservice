@@ -1,1 +1,2 @@
-from app.models import event, type
+import event
+import type

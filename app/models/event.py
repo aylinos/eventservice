@@ -4,7 +4,9 @@ from sqlalchemy import (Boolean, Column, DateTime, Float, ForeignKey, Integer,
                         String, Text)
 from sqlalchemy.orm import relationship
 
-from app.db.session import Base
+from ..db.session import Base
+
+# from app.db.session import Base
 
 
 class Event(Base):

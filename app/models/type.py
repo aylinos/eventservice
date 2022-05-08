@@ -1,7 +1,9 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
-from app.db.session import Base
+from ..db.session import Base
+
+# from app.db.session import Base
 
 
 class Type(Base):

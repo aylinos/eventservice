@@ -1,8 +1,11 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.models import event
-from app.schemas import eventschema
+from ..models import event
+from ..schemas import eventschema
+
+# from app.models import event
+# from app.schemas import eventschema
 
 
 def get_all(db: Session):

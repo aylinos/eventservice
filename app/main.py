@@ -20,4 +20,4 @@ def read_root():
     return {"List of all events"}
 
 
-handler = Mangum(app=app, lifespan="off")  # <----------- wrap the API with Mangum
+handler = Mangum(app=app)  # <----------- wrap the API with Mangum

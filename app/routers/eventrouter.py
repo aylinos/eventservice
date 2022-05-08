@@ -3,9 +3,13 @@ from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from app.db.session import get_db
-from app.repository import eventrepo
-from app.schemas import eventschema
+from ..db.session import get_db
+from ..repository import eventrepo
+from ..schemas import eventschema
+
+# from app.db.session import get_db
+# from app.repository import eventrepo
+# from app.schemas import eventschema
 
 router = APIRouter(
     prefix="/event",

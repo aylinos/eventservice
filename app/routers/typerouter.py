@@ -3,9 +3,13 @@ from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from app.db.session import get_db
-from app.repository import typerepo
-from app.schemas import typeschema
+from ..db.session import get_db
+from ..repository import typerepo
+from ..schemas import typeschema
+
+# from app.db.session import get_db
+# from app.repository import typerepo
+# from app.schemas import typeschema
 
 router = APIRouter(
     prefix="/type",
