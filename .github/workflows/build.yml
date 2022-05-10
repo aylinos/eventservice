@@ -51,7 +51,7 @@ jobs:
           sam validate
       - name: Build Docker image
         run: |
-          docker build --file Dockerfile .
+          sam build --use-container --debug
 
   continuous-deployment:
     runs-on: ubuntu-latest
