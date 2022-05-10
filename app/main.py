@@ -1,4 +1,4 @@
-import pika
+# import pika
 from fastapi import FastAPI
 from mangum import Mangum  # Amazon Lambda handler
 
