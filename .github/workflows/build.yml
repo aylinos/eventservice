@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -40,46 +42,28 @@ jobs:
         env: 
           DB_URI: ${{ secrets.DB_URI }}
         run: . venv/bin/activate && pytest
-      - name: Build Docker image
-        run: docker build --file Dockerfile .
-      - name: Create Zipfile archive of Dependencies
+      - name: Validate CloudFormation Template
         run: |
-          cd ./venv/lib/python3.9/site-packages
-          zip -r9 ../../../../api.zip .
-      - name: Add App to Zip file
-        run: cd ./app && zip -g ../api.zip -r .
-      - name: Upload zip file artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: api
-          path: api.zip
+          sam validate
+      - name: Build Docker image
+        run: |
+          sam build --use-container --debug
 
   continuous-deployment:
     runs-on: ubuntu-latest
     needs: [continuous-integration]
     if: github.ref == 'refs/heads/master'
     steps:
-      - name: Install AWS CLI
-        uses: unfor19/install-aws-cli-action@v1
-        with:
-          version: 1
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      - name: Download Lambda api.zip
-        uses: actions/download-artifact@v2
-        with: 
-          name: api
       - name: Upload to S3  
-        run: aws s3 cp api.zip s3://eventorbucket/api.zip
+        run: |
+          sam package --s3-bucket eventorbucket --output-template-file out.yml --region eu-central-1
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Deploy new Lambda
-        run: aws lambda update-function-code --function-name
-          eventorfunction --s3-bucket eventorbucket --s3-key api.zip
+        run: |
+          sam deploy --template-file out.yml --stack-name eventor-events --region eu-central-1 --no-fail-on-empty-changeset --capabilities CAPABILITY_IAM
         env: 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
