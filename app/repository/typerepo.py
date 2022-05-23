@@ -4,9 +4,6 @@ from sqlalchemy.orm import Session
 from ..models import type
 from ..schemas import typeschema
 
-# from app.models import type
-# from app.schemas import typeschema
-
 
 def get_all(db: Session):
     types = db.query(type.Type).all()

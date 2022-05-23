@@ -4,9 +4,6 @@ from sqlalchemy.orm import Session
 from ..models import event
 from ..schemas import eventschema
 
-# from app.models import event
-# from app.schemas import eventschema
-
 
 def get_all(db: Session):
     # User must be admin

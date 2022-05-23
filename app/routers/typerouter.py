@@ -7,10 +7,6 @@ from ..db.session import get_db
 from ..repository import typerepo
 from ..schemas import typeschema
 
-# from app.db.session import get_db
-# from app.repository import typerepo
-# from app.schemas import typeschema
-
 router = APIRouter(
     prefix="/type",
     tags=['types']

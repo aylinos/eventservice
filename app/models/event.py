@@ -6,8 +6,6 @@ from sqlalchemy.orm import relationship
 
 from ..db.session import Base
 
-# from app.db.session import Base
-
 
 class Event(Base):
     __tablename__ = "events"
