@@ -11,7 +11,7 @@ Resources:
         Properties:
             Environment:
                 Variables:
-                    DB_URI: "${Db}"
+                    DB_URI: ${{ secrets.DB_URI }}
             Events:
                 ApiEvent:
                     Properties:
