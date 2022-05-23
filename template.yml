@@ -2,16 +2,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
     eventor fastAPI aws lambda example
-Parameters:
-    Db:
-        Type: String
 Resources:
     EventorLambda:
         Type: AWS::Serverless::Function
         Properties:
             Environment:
                 Variables:
-                    DB_URI: ${{Parameters.Db}}
+                    DB_URI: postgresql://eventor:eventor_s6@eventor.ctafcc3bhwfo.eu-central-1.rds.amazonaws.com:5432/eventorevents
             Events:
                 ApiEvent:
                     Properties:
