@@ -31,10 +31,4 @@ def read_root():
     return {"Eventor": "Welcome to EVENTS service"}
 
 
-# Get all events
-@app.get("/events")
-def read_root():
-    return {"List of all events"}
-
-
 handler = Mangum(app=app)  # <----------- wrap the API with Mangum

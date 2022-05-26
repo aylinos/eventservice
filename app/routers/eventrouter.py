@@ -8,12 +8,12 @@ from ..repository import eventrepo
 from ..schemas import eventschema
 
 router = APIRouter(
-    prefix="/event",
+    prefix="/events",
     tags=['events']
 )
 
 
-@router.get("/", response_model=List[eventschema.EventOut])
+@router.get("", response_model=List[eventschema.EventOut])
 def get_all_events(db: Session = Depends(get_db)):
     return eventrepo.get_all(db)
 
@@ -23,7 +23,7 @@ def get_one_event(id: int, db: Session = Depends(get_db)):
     return eventrepo.get_one(id, db)
 
 
-@router.post("/", response_model=eventschema.EventOut)
+@router.post("", response_model=eventschema.EventOut)
 def create_event(request: eventschema.EventIn, db: Session = Depends(get_db)):
     return eventrepo.create(request, db)
 

@@ -8,12 +8,12 @@ from ..repository import typerepo
 from ..schemas import typeschema
 
 router = APIRouter(
-    prefix="/type",
+    prefix="/types",
     tags=['types']
 )
 
 
-@router.get("/", response_model=List[typeschema.TypeOut])
+@router.get("", response_model=List[typeschema.TypeOut])
 def get_all_types(db: Session = Depends(get_db)):
     return typerepo.get_all(db)
 
@@ -23,7 +23,7 @@ def get_one_type(id: int, db: Session = Depends(get_db)):
     return typerepo.get_one(id, db)
 
 
-@router.post("/", response_model=typeschema.TypeOut)
+@router.post("", response_model=typeschema.TypeOut)
 def create_type(request: typeschema.TypeIn, db: Session = Depends(get_db)):
     return typerepo.create(request, db)
 
