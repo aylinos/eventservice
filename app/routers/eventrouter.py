@@ -31,7 +31,7 @@ def get_one_event(id: int, db: Session = Depends(get_db)):
 @router.post("")
 def create_event(request: eventschema.EventIn, db: Session = Depends(get_db), token = Depends(oauth2_scheme)):
     headers = {'Authorization': 'Bearer ' + token}
-    r = requests.get('http://localhost:8000/users/id', headers=headers)
+    r = requests.get('https://wmuomxks8g.execute-api.eu-central-1.amazonaws.com/eventor/users/id', headers=headers)
     request.creator = r.json()
     return eventrepo.create(request, db)
 
