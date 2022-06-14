@@ -1,11 +1,16 @@
 from typing import List
 
 from fastapi import APIRouter, Depends, status
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
 from ..db.session import get_db
 from ..repository import eventrepo
 from ..schemas import eventschema
+
+import requests
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 router = APIRouter(
     prefix="/events",
@@ -23,8 +28,11 @@ def get_one_event(id: int, db: Session = Depends(get_db)):
     return eventrepo.get_one(id, db)
 
 
-@router.post("", response_model=eventschema.EventOut)
-def create_event(request: eventschema.EventIn, db: Session = Depends(get_db)):
+@router.post("")
+def create_event(request: eventschema.EventIn, db: Session = Depends(get_db), token = Depends(oauth2_scheme)):
+    headers = {'Authorization': 'Bearer ' + token}
+    r = requests.get('http://localhost:8000/users/id', headers=headers)
+    request.creator = r.json()
     return eventrepo.create(request, db)
 
 
